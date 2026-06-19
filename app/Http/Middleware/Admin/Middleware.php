@@ -1,0 +1,29 @@
+<?php
+
+namespace App\Http\Middleware\Admin;
+
+use Closure;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+
+class Middleware
+{
+    /**
+     * Handle an incoming request.
+     *
+     * @param  Closure(Request): (Response)  $next
+     */
+    public function handle(Request $request, Closure $next): Response
+    {
+        if(Auth::check() && Auth::user()->role_id == User::ADMIN_ROLE_ID) {
+            // auth::check - returns TRUE if the user is logged in
+            // check if auth user has admin_role_id
+            return $next($request);
+            // continue to next request (controller or middleware)
+        }
+        
+        return redirect()->route('index');
+    }
+}
