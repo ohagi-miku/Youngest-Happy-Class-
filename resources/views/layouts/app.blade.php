@@ -77,7 +77,7 @@
 
                             {{-- Direct Message --}}
                             <li class="nav-item" title="Messages">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('message.index')}}" class="nav-link">
                                     <i class="fa-solid fa-envelope text-dark icon-sm"></i>
                                 </a>
                             </li>
