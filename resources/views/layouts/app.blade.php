@@ -74,6 +74,14 @@
                                     <i class="fa-solid fa-circle-plus text-dark icon-sm"></i>
                                 </a>
                             </li>
+
+                            {{-- Direct Message --}}
+                            <li class="nav-item" title="Messages">
+                                <a href="#" class="nav-link">
+                                    <i class="fa-solid fa-envelope text-dark icon-sm"></i>
+                                </a>
+                            </li>
+
                                 {{-- Account --}}
                             <li class="nav-item dropdown">
                                 <button id="account-dropdown" class="btn shadow-none nav-link" data-bs-toggle="dropdown">
@@ -99,6 +107,7 @@
                                     <a href="{{ route('profile.show', Auth::user()->id) }}" class="dropdown-item">
                                         <i class="fa-solid fa-circle-user"></i> Profile
                                     </a>
+
                                     {{-- Logout --}}
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
