@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\CategoriesController;
 
 //test
 // this is test orina
+// I miss Camotes
 
 
 Auth::routes();
