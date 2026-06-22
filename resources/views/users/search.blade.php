@@ -3,10 +3,27 @@
 @section('title', 'Explore People')
  
 @section('content')
-    <div class="row justify-content-center">
-        <div class="col-5">
+    <p class="h5 text-muted mb-4">Search results for "<span class="fw-bold">{{ $search }}</span>"</p>
 
-            <p class="h5 text-muted mb-4">Search results for "<span class="fw-bold">{{ $search }}</span>"</p>
+    <div class="row">
+
+        {{-- 左カラム: 投稿一覧 --}}
+        <div class="col-7">
+            <p class="fw-bold text-secondary">Posts</p>
+
+            @forelse ($posts as $post)
+                <div class="card mb-4">
+                    @include('users.posts.contents.title')
+                    @include('users.posts.contents.body')
+                </div>
+            @empty
+                <p class="text-muted">No posts found.</p>
+            @endforelse
+        </div>
+
+        {{-- 右カラム: ユーザー一覧 --}}
+        <div class="col-5">
+            <p class="fw-bold text-secondary">Users</p>
 
             @forelse ($users as $user)
                 <div class="row align-items-center mb-3">
@@ -41,9 +58,9 @@
                     </div>
                 </div>
             @empty
-                <p class="lead text-muted text-center">No users found.</p>
+                <p class="text-muted">No users found.</p>
             @endforelse
         </div>
+
     </div>
 @endsection
- 

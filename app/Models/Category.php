@@ -10,4 +10,9 @@ class Category extends Model
     public function categoryPost() {
         return $this->hasMany(CategoryPost::class);
     }
+
+    // SEARCH - カテゴリーに紐づく投稿を取得する
+    public function posts() {
+        return $this->belongsToMany(Post::class, 'category_post', 'category_id', 'post_id');
+    }
 }
