@@ -34,9 +34,17 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     {{-- [SOON] Search bar here. --}}
-                    <ul class="navbar-nav me-auto">
-
-                    </ul>
+                    @auth
+                        {{-- This is only available for logged in users --}}
+                        @if (!request()->is('admin/*'))
+                            {{-- Search functionality will not show up in admin pages --}}
+                            <ul class="navbar-nav ms-auto">
+                                <form action="{{ route('search')}}" style="width: 300px">
+                                    <input type="search" name="search" class="form-control form-control-sm" placeholder="Search">
+                                </form>
+                            </ul>
+                        @endif
+                    @endauth
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
