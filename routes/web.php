@@ -12,7 +12,7 @@ use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\PostsController;
 use App\Http\Controllers\Admin\CategoriesController;
 
-
+//test
 
 
 Auth::routes();
