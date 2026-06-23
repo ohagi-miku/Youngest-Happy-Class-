@@ -20,7 +20,12 @@ class MessageController extends Controller
     }
 
     public function index(){
-        return view('users.messages.index');
+        $all_messages = $this->message->latest()->get();
+        return view('users.messages.index')->with('all_messages', $all_messages);
+    }
+
+    public function create() {
+       return view('users.messages.create');
     }
 
 
