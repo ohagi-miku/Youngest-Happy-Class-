@@ -3,6 +3,9 @@
 @section('title', 'Explore People')
 
 @section('content')
+    <form action="{{ route('search') }}" class="mb-4 d-flex justify-content-center">
+        <input type="search" name="search" class="form-control w-50" placeholder="Search" value="{{ $search }}">
+    </form>
     <p class="h5 text-muted mb-4">Search results for "<span class="fw-bold">{{ $search }}</span>"</p>
 
     <div class="row">
