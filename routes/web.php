@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\PostsController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\MessageController;
+use App\Models\Message;
 
 //test
 // this is test orina
@@ -72,5 +73,6 @@ Route::group(['middleware' => 'auth'], function(){
 
     #MESSAGE
     Route::get('/message/index', [MessageController::class, 'index'])->name('message.index');
+    Route::get('/messages/create', [MessageController::class, 'create'])->name('message.create');
 
 });
