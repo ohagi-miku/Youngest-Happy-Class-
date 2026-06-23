@@ -30,7 +30,7 @@
             style="width: 80px; position: sticky; top: 0;">
 
             {{-- ロゴ --}}
-            <a href="{{ url('/') }}" class="mb-4 text-dark">
+            <a href="{{ url('/') }}" class="mb-4 text-dark" id="insta-logo">
                 <i class="fa-brands fa-instagram icon-sm"></i>
             </a>
 
