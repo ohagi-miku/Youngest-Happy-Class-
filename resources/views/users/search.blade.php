@@ -1,7 +1,7 @@
 @extends('layouts.app')
- 
+
 @section('title', 'Explore People')
- 
+
 @section('content')
     <p class="h5 text-muted mb-4">Search results for "<span class="fw-bold">{{ $search }}</span>"</p>
 
@@ -37,8 +37,14 @@
                         </a>
                     </div>
                     <div class="col ps-0 text-truncate">
-                        <a href="{{ route('profile.show', $user->id) }}" class="text-decoration-none text-dark fw-bold">{{ $user->name }}</a>
+                        <a href="{{ route('profile.show', $user->id) }}"
+                            class="text-decoration-none text-dark fw-bold">{{ $user->name }}</a>
                         <p class="text-muted mb-0">{{ $user->email }}</p>
+                        @if ($user->introduction)
+                            <p class="text-muted small mb-0">
+                                {!! str_ireplace($search, '<strong class="text-dark">' . $search . '</strong>', e($user->introduction)) !!}
+                            </p>
+                        @endif
                     </div>
                     <div class="col-auto">
                         @if ($user->id !== Auth::user()->id)
@@ -46,7 +52,8 @@
                                 <form action="{{ route('follow.destroy', $user->id) }}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-outline-secondary fw-bold btn-sm">Following</button>
+                                    <button type="submit"
+                                        class="btn btn-outline-secondary fw-bold btn-sm">Following</button>
                                 </form>
                             @else
                                 <form action="{{ route('follow.store', $user->id) }}" method="POST">
