@@ -88,3 +88,8 @@ body {
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
+
+.btn-close-friend:hover {
+    background-color: #d4edda !important;; 
+    color: #333 !important;;
+}

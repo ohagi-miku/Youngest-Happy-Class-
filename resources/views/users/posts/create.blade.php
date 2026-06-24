@@ -1,11 +1,20 @@
 @extends('layouts.app')
- 
+
 @section('title', 'Create Post')
- 
+
 @section('content')
     <form action="{{ route('post.store') }}" method="post" enctype="multipart/form-data">
         @csrf
-        
+
+        <div class="mb-4">
+            <div class="form-check">
+                <input type="checkbox" name="is_close_friend" id="is_close_friend" value="1" class="form-check-input ms-2">
+                <label for="is_close_friend" class="form-check-label">
+                    <h5 ><i class="fa-solid fa-user-group ms-2"></i>  Close Friends Only</h5>
+                </label>
+            </div>
+        </div>
+
         <div class="mb-3">
             <label for="category" class="form-label d-block fw-bold">
                 Category <span class="text-muted fw-normal">(up to 3)</span>
@@ -13,7 +22,8 @@
 
             @foreach ($all_categories as $category)
                 <div class="form-check form-check-inline">
-                    <input type="checkbox" name="category[]" id="{{ $category->name }}" value="{{ $category->id }}" class="form-check-label">
+                    <input type="checkbox" name="category[]" id="{{ $category->name }}" value="{{ $category->id }}"
+                        class="form-check-label">
                     <label for="{{ $category->name }}" class="form-check-label">{{ $category->name }}</label>
                 </div>
             @endforeach
@@ -31,7 +41,7 @@
                 <div class="text-danger small">{{ $message }}</div>
             @enderror
         </div>
-        
+
         <div class="mb-4">
             <label for="image" class="form-label fw-bold">Image</label>
             <input type="file" name="image" id="image" class="form-control" aria-describedby="image-info">
@@ -47,4 +57,3 @@
         <button type="submit" class="btn btn-primary px-5">Post</button>
     </form>
 @endsection
- 

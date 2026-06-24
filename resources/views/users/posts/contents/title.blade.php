@@ -12,6 +12,12 @@
         <div class="col ps-0">
             <a href="{{ route('profile.show', $post->user->id) }}"
                 class="text-decoration-none text-dark">{{ $post->user->name }}</a>
+            @if ($post->is_close_friend)
+                <span class="ms-3 small text-secondary btn-close-friend fw-bold"
+                    style="border: 1px solid #b8e0b8; padding: 2px 8px; border-radius: 4px;">
+                    <i class="fa-solid fa-star" style="color: #b8e0b8;"></i> Close Friends
+                </span>
+            @endif
         </div>
         <div class="col-auto">
             <div class="dropdown">

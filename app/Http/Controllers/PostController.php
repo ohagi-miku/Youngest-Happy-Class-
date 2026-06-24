@@ -40,6 +40,7 @@ class PostController extends Controller
         $this->post->image          = 'data:image/' . $request->image->extension() .
                                         ';base64,' . base64_encode(file_get_contents($request->image));
         $this->post->description    = $request->description;
+        $this->post->is_close_friend = $request->has('is_close_friend') ? 1 : 0;
         $this->post->save();
 
         #. Save the categories to the category_post table
