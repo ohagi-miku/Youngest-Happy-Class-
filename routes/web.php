@@ -11,6 +11,8 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\PostsController;
 use App\Http\Controllers\Admin\CategoriesController;
+use App\Http\Controllers\MessageController;
+use App\Models\Message;
 
 //test
 // this is test orina
@@ -68,5 +70,9 @@ Route::group(['middleware' => 'auth'], function(){
     #FOLLOW
     Route::post('/follow/{user_id}/store', [FollowController::class, 'store'])->name('follow.store');
     Route::delete('/follow/{user_id}/destroy', [FollowController::class, 'destroy'])->name('follow.destroy');
+
+    #MESSAGE
+    Route::get('/message/index', [MessageController::class, 'index'])->name('message.index');
+    Route::get('/messages/create', [MessageController::class, 'create'])->name('message.create');
 
 });
