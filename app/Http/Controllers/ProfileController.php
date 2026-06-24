@@ -16,19 +16,36 @@ class ProfileController extends Controller
     }
 
     #show/get specific user
-    public function show($id) {
+    public function show($id)
+    {
         $user = $this->user->findOrFail($id);
         return view('users.profile.show')->with('user', $user);
     }
 
     #edit user
-    public function edit() {
-        $user = $this->user->findOrFail(Auth::user()->id); //logged in users are the one who will do the actions to edit
-        return view('users.profile.edit')->with('user', $user);
+    public function edit()
+    {
+        $user = $this->user->findOrFail(Auth::user()->id);
+
+        $close_friends = $user->closeFriends()->with('closeFriendUser')->get();
+
+        $close_friend_ids = $close_friends->pluck('close_friend_id')->toArray();
+        $followers = $user->followers()
+            ->with('follower')
+            ->get()
+            ->filter(function ($follow) use ($close_friend_ids) {
+                return !in_array($follow->follower_id, $close_friend_ids);
+            });
+
+        return view('users.profile.edit')
+            ->with('user', $user)
+            ->with('close_friends', $close_friends)
+            ->with('followers', $followers);
     }
 
     #updata profile info
-    public function update(Request $request) {
+    public function update(Request $request)
+    {
         $request->validate([
             'name'          => 'required|min:1|max:50',
             'email'         => 'required|email|max:50|unique:users,email,' . Auth::user()->id,
@@ -43,7 +60,7 @@ class ProfileController extends Controller
         $user->email        = $request->email;
         $user->introduction = $request->introduction;
 
-        if($request->avatar){
+        if ($request->avatar) {
             $user->avatar = 'data:image/' . $request->avatar->extension() . ';base64,' . base64_encode(file_get_contents($request->avatar));
         }
         $user->save();
@@ -51,12 +68,14 @@ class ProfileController extends Controller
         return redirect()->route('profile.show', Auth::user()->id);
     }
 
-    public function followers($id) {
+    public function followers($id)
+    {
         $user = $this->user->findOrFail($id);
         return view('users.profile.followers')->with('user', $user);
     }
 
-    public function following($id) {
+    public function following($id)
+    {
         $user = $this->user->findOrFail($id);
         return view('users.profile.following')->with('user', $user);
     }
