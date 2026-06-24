@@ -48,3 +48,43 @@
     height: 3.5rem;
     object-fit: cover;
 }
+
+/* THEME COLORS */
+:root {
+    --navy: #FFFEF9;
+    --sidebar: #FFFEF6;
+    --red: #F7ADC3;
+}
+
+body {
+    background-color: var(--navy);
+    color: #333;
+}
+
+
+#app nav {
+    background-color: var(--sidebar) !important;
+    border-color: #e8ddd0 !important;
+}
+
+#app main {
+    background-color: var(--navy);
+}
+
+#app nav .nav-link i {
+     background: linear-gradient(45deg, #c084fc, #e879a0, #fb7185, #ffffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.fa-heart {
+    color: var(--red);
+}
+
+#insta-logo {
+    background: linear-gradient(45deg, #c084fc, #e879a0, #fb7185, #ffffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}

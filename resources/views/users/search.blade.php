@@ -1,12 +1,32 @@
 @extends('layouts.app')
- 
-@section('title', 'Explore People')
- 
-@section('content')
-    <div class="row justify-content-center">
-        <div class="col-5">
 
-            <p class="h5 text-muted mb-4">Search results for "<span class="fw-bold">{{ $search }}</span>"</p>
+@section('title', 'Explore People')
+
+@section('content')
+    <form action="{{ route('search') }}" class="mb-4 d-flex justify-content-center">
+        <input type="search" name="search" class="form-control w-50" placeholder="Search" value="{{ $search }}">
+    </form>
+    <p class="h5 text-muted mb-4">Search results for "<span class="fw-bold">{{ $search }}</span>"</p>
+
+    <div class="row">
+
+        {{-- 左カラム: 投稿一覧 --}}
+        <div class="col-7">
+            <p class="fw-bold text-secondary">Posts</p>
+
+            @forelse ($posts as $post)
+                <div class="card mb-4">
+                    @include('users.posts.contents.title')
+                    @include('users.posts.contents.body')
+                </div>
+            @empty
+                <p class="text-muted">No posts found.</p>
+            @endforelse
+        </div>
+
+        {{-- 右カラム: ユーザー一覧 --}}
+        <div class="col-5">
+            <p class="fw-bold text-secondary">Users</p>
 
             @forelse ($users as $user)
                 <div class="row align-items-center mb-3">
@@ -20,8 +40,14 @@
                         </a>
                     </div>
                     <div class="col ps-0 text-truncate">
-                        <a href="{{ route('profile.show', $user->id) }}" class="text-decoration-none text-dark fw-bold">{{ $user->name }}</a>
+                        <a href="{{ route('profile.show', $user->id) }}"
+                            class="text-decoration-none text-dark fw-bold">{{ $user->name }}</a>
                         <p class="text-muted mb-0">{{ $user->email }}</p>
+                        @if ($user->introduction)
+                            <p class="text-muted small mb-0">
+                                {!! str_ireplace($search, '<strong class="text-dark">' . $search . '</strong>', e($user->introduction)) !!}
+                            </p>
+                        @endif
                     </div>
                     <div class="col-auto">
                         @if ($user->id !== Auth::user()->id)
@@ -29,7 +55,8 @@
                                 <form action="{{ route('follow.destroy', $user->id) }}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-outline-secondary fw-bold btn-sm">Following</button>
+                                    <button type="submit"
+                                        class="btn btn-outline-secondary fw-bold btn-sm">Following</button>
                                 </form>
                             @else
                                 <form action="{{ route('follow.store', $user->id) }}" method="POST">
@@ -41,9 +68,9 @@
                     </div>
                 </div>
             @empty
-                <p class="lead text-muted text-center">No users found.</p>
+                <p class="text-muted">No users found.</p>
             @endforelse
         </div>
+
     </div>
 @endsection
- 

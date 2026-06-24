@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Category;
 
 class HomeController extends Controller
 {
@@ -69,7 +70,22 @@ class HomeController extends Controller
     }
 
     public function search(Request $request) {
-        $users = $this->user->where('name', 'like', '%' .$request->search.'%')->get();
-        return view('users.search')->with('users', $users)->with('search', $request->search);
-    }
+    $keyword = $request->search;
+
+    $users = $this->user
+        ->where(function($query) use ($keyword) {
+            $query->where('name', 'like', '%' . $keyword . '%')
+                  ->orWhere('introduction', 'like', '%' . $keyword . '%');
+        })
+        ->where('id', '!=', Auth::user()->id)
+        ->get();
+
+    $category = Category::where('name', $keyword)->first();
+    $posts = $category ? $category->posts()->latest()->get() : collect();
+
+    return view('users.search')
+        ->with('search', $keyword)
+        ->with('users', $users)
+        ->with('posts', $posts);
+}
 }
