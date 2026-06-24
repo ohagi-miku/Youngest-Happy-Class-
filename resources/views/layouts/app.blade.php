@@ -29,12 +29,12 @@
         <nav class="d-flex flex-column align-items-center vh-100 py-4 border-end bg-white"
             style="width: 80px; position: sticky; top: 0;">
 
-            {{-- ロゴ --}}
+            {{--    Instagram　logo --}}
             <a href="{{ url('/') }}" class="mb-4 text-dark" id="insta-logo">
                 <i class="fa-brands fa-instagram icon-sm"></i>
             </a>
 
-            {{-- ナビアイコン --}}
+            {{-- nav-bar --}}
             @auth
                 @if (!request()->is('admin/*'))
                     <ul class="navbar-nav d-flex flex-column align-items-center gap-3 mt-5">
@@ -46,10 +46,18 @@
                             </a>
                         </li>
 
+
                         {{-- Search --}}
                         <li class="nav-item" title="Search">
                             <a href="{{ route('search') }}" class="nav-link text-dark">
                                 <i class="fa-solid fa-magnifying-glass icon-sm"></i>
+                            </a>
+                        </li>
+
+                        {{-- Direct Message --}}
+                        <li class="nav-item" title="Messages">
+                            <a href="{{route('message.index')}}" class="nav-link">
+                                <i class="fa-solid fa-envelope text-dark icon-sm"></i>
                             </a>
                         </li>
 
