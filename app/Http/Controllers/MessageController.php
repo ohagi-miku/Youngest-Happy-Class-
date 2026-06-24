@@ -25,7 +25,22 @@ class MessageController extends Controller
     }
 
     public function create() {
-       return view('users.messages.create');
+        $friend_users = $this->getFriendUsers();
+
+        return view('users.messages.create')->with('friend_users', $friend_users);
+    }
+
+    public function getFriendUsers() {
+       $all_users = $this->user->all()->except(Auth::user()->id);
+       $friend_users = [];
+
+       foreach($all_users as $user) { 
+            if($user->isFollowed() && $user->followsMe()) {
+                
+                $friend_users[] = $user; 
+            }
+        }
+        return $friend_users;
     }
 
 
