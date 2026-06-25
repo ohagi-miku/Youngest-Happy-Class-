@@ -16,7 +16,13 @@
             <table class="table table-hover bg-light align-middle">
                 <tbody>
                     <tr>
-                        <td>user</td>
+                        <td>
+                            @if ($message->receiver_id === Auth::user()->id)
+                                {{$message->sender->name}}
+                            @else
+                                {{$message->receiver->name}}
+                            @endif
+                        </td>
                         <td>{{$message->message}}</td>
                         <td>{{$message->created_at}}</td>
                     </tr>
