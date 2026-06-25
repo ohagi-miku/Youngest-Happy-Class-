@@ -76,6 +76,7 @@ Route::group(['middleware' => 'auth'], function () {
     #MESSAGE
     Route::get('/message/index', [MessageController::class, 'index'])->name('message.index');
     Route::get('/messages/create', [MessageController::class, 'create'])->name('message.create');
+    Route::post('/messages/store', [MessageController::class, 'store'])->name('message.store');
 
     #CLOSE FRIENDS
     Route::post('/close-friend/store', [CloseFriendController::class, 'store'])->name('close_friend.store');

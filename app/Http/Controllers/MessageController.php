@@ -43,5 +43,22 @@ class MessageController extends Controller
         return $friend_users;
     }
 
+    public function store(Request $request) {
+       $request->validate([
+           'message' => 'required',
+           'receiver' => 'required'
+       ]);
+
+       $this->message->sender_id = Auth::user()->id;
+       $this->message->message = $request->message;
+       $this->message->receiver_id = $request->receiver;
+
+       $this->message->save();
+
+       return redirect()->route('message.index');
+    }
+
+    
+
 
 }
