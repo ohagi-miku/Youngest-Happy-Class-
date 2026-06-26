@@ -7,6 +7,8 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\CloseFriendController;
+
 #Admin Controller
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\PostsController;
@@ -21,11 +23,11 @@ use App\Models\Message;
 
 Auth::routes();
 
-Route::group(['middleware' => 'auth'], function(){
+Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [HomeController::class, 'index'])->name('index');
     Route::get('/people', [HomeController::class, 'search'])->name('search');
 
-    Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function(){
+    Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function () {
         // USERS
         Route::get('/users', [UsersController::class, 'index'])->name('users');
         Route::delete('/users/{id}/deactivate', [UsersController::class, 'deactivate'])->name('users.deactivate');
@@ -58,7 +60,7 @@ Route::group(['middleware' => 'auth'], function(){
     #PROFILE
     Route::get('/profile/{id}/show', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');  
+    Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('/profile/{id}/followers', [ProfileController::class, 'followers'])->name('profile.followers');
     Route::get('/profile/{id}/following', [ProfileController::class, 'following'])->name('profile.following');
 
@@ -77,4 +79,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('/messages/store', [MessageController::class, 'store'])->name('message.store');
     Route::get('/messages/{user}/show', [MessageController::class, 'show'])->name('message.show');
 
+    #CLOSE FRIENDS
+    Route::post('/close-friend/store', [CloseFriendController::class, 'store'])->name('close_friend.store');
+    Route::delete('/close-friend/destroy', [CloseFriendController::class, 'destroy'])->name('close_friend.destroy');
 });
