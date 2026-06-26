@@ -50,7 +50,7 @@
                             </td>
                             <td class="col-2">{{ $user->name }}</td>
                             <td class="col-6 text-secondary">No messages yet.</td>
-                            <td></td>
+                            <td class="col-2"></td>
                         </tr>
                     @endforeach
                 </tbody>

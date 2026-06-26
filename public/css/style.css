@@ -216,8 +216,8 @@ body {
     border-bottom: none;
 }
 
-.messages-container table tbody tr:hover {
-    background-color: rgba(247, 173, 195, 0.12) !important; /* --red を薄く */
+.messages-container table tbody tr:hover td {
+    background-color: rgba(247, 173, 195, 0.12) !important;
 }
 
 .messages-container table td {
@@ -232,7 +232,6 @@ body {
 
 /* アバター列を縦中央揃え(画像とアイコンの位置ズレ対策) */
 .messages-container table td.col-2:first-child {
-    display: flex;
     align-items: center;
     justify-content: flex-start;
 }
