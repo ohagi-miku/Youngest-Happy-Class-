@@ -3,6 +3,9 @@
 @section('title', 'Create Post')
 
 @section('content')
+
+    <h2 class="page-title mb-5">New Post</h2>
+
     <form action="{{ route('post.store') }}" method="post" enctype="multipart/form-data">
         @csrf
 
@@ -10,7 +13,7 @@
             <div class="form-check">
                 <input type="checkbox" name="is_close_friend" id="is_close_friend" value="1" class="form-check-input ms-2">
                 <label for="is_close_friend" class="form-check-label">
-                    <h5 ><i class="fa-solid fa-user-group ms-2"></i>  Close Friends Only</h5>
+                    <h5><i class="fa-solid fa-user-group ms-2"></i> Close Friends Only</h5>
                 </label>
             </div>
         </div>

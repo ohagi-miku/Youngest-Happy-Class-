@@ -3,6 +3,9 @@
 @section('title', 'Home')
  
 @section('content')
+
+    <h1 class="page-title mb-4">All Posts</h1>
+
     <div class="row gx-5">
         <div class="col-8">
             @forelse ($home_posts as $post)
