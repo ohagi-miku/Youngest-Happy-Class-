@@ -50,11 +50,11 @@ class MessageController extends Controller
             ->with('friend_users', $friend_users);
     }
 
-    public function create() {
-        $friend_users = $this->getFriendUsers();
+    // public function create() {
+    //     $friend_users = $this->getFriendUsers();
 
-        return view('users.messages.create')->with('friend_users', $friend_users);
-    }
+    //     return view('users.messages.create')->with('friend_users', $friend_users);
+    // }
 
     public function getFriendUsers() {
        $all_users = $this->user->all()->except(Auth::user()->id);
