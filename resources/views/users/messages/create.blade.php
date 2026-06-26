@@ -4,7 +4,7 @@
  
 @section('content')
     <div class="container w-50 mx-auto">
-        <form action="{{route('message.store')}}" method="post">
+        <form action="#" method="post">
             @csrf
             <div class="input-group">
                 <select name="receiver" id="receiver" class="form-select">
