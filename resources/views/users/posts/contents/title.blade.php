@@ -46,6 +46,7 @@
                             @method('DELETE')
 
                             <button type="submit" class="dropdown-item text-danger">Unfollow</button>
+                            
                         </form>
                     </div>
                 @endif

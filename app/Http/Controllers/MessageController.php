@@ -28,13 +28,26 @@ class MessageController extends Controller
             ->orWhere('receiver_id', $authId)
             ->latest()
             ->get();
-        
+
+        // 相手ユーザーIDごとにグループ化し、各グループの最新1件だけ残す
         $all_messages = $messages->groupBy(function ($message) use ($authId) {
             return $message->sender_id === $authId ? $message->receiver_id : $message->sender_id;
         })->map(function ($group) {
             return $group->first();
         });
-        return view('users.messages.index')->with('all_messages', $all_messages);
+
+        // すでに会話済みの相手のIDを取得
+        $chattedUserIds = $all_messages->keys();
+
+        // フォローし合っている全ユーザーから、未会話の相手だけを抽出
+        $friend_users = collect($this->getFriendUsers())
+            ->reject(function ($user) use ($chattedUserIds) {
+                return $chattedUserIds->contains($user->id);
+            });
+
+        return view('users.messages.index')
+            ->with('all_messages', $all_messages)
+            ->with('friend_users', $friend_users);
     }
 
     public function create() {

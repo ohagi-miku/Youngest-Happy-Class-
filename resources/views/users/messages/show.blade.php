@@ -11,11 +11,11 @@
                 <i class="fa-solid fa-arrow-left"></i>
             </a>
             @if ($partner->avatar)
-                <img src="{{ $partner->avatar }}" class="rounded-circle avatar-sm me-2">
+                <a href="{{ route('profile.show', $partner->id) }}"><img src="{{ $partner->avatar }}" class="rounded-circle avatar-sm me-2"></a>
             @else
-                <i class="fa-solid fa-circle-user text-secondary icon-sm me-2"></i>
+                <a href="{{ route('profile.show', $partner->id) }}"><i class="fa-solid fa-circle-user text-secondary icon-sm me-2"></i></a>
             @endif
-            <span class="fw-bold">{{ $partner->name }}</span>
+            <a href="{{ route('profile.show', $partner->id) }}" class="text-decoration-none text-dark"><span class="fw-bold">{{ $partner->name }}</span></a>
         </div>
 
         {{-- メッセージ履歴 --}}

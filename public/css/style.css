@@ -89,13 +89,22 @@ body {
     background-clip: text;
 }
 
-/* DM function */
+/* ===== Chat Page (テーマカラー対応) ===== */
+
 .chat-wrapper {
     height: 100vh;
+    background-color: var(--navy);
+}
+
+.chat-header,
+.chat-footer {
+    background-color: var(--sidebar) !important;
+    border-color: #e8ddd0 !important;
 }
 
 .chat-body {
     overflow-y: auto;
+    background-color: var(--navy);
 }
 
 .chat-bubble {
@@ -105,15 +114,18 @@ body {
     word-break: break-word;
 }
 
+/* 自分のメッセージ:グラデーションで主役感を出す */
 .chat-bubble-mine {
-    background-color: #0d6efd;
+    background: linear-gradient(45deg, #c084fc, #e879a0, #fb7185);
     color: #fff;
     border-bottom-right-radius: 4px;
 }
 
+/* 相手のメッセージ:クリーム系で控えめに */
 .chat-bubble-theirs {
-    background-color: #e9ecef;
-    color: #000;
+    background-color: var(--sidebar);
+    color: #333;
+    border: 1px solid #e8ddd0;
     border-bottom-left-radius: 4px;
 }
 
@@ -124,12 +136,150 @@ body {
 
 .chat-time {
     font-size: 0.7rem;
-    opacity: 0.7;
+    opacity: 0.75;
     text-align: right;
     margin-top: 2px;
+}
+
+.chat-bubble-mine .chat-time {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.chat-bubble-theirs .chat-time {
+    color: #b09d87;
 }
 
 .image-preview-thumb {
     max-height: 80px;
     border-radius: 8px;
 }
+
+/* 送信ボタン・入力欄もテーマに合わせる */
+.chat-footer .btn-primary {
+    background: linear-gradient(45deg, #c084fc, #e879a0, #fb7185);
+    border: none;
+}
+
+.chat-footer .btn-primary:hover {
+    opacity: 0.9;
+}
+
+.chat-footer .form-control:focus {
+    border-color: var(--red);
+    box-shadow: 0 0 0 0.2rem rgba(247, 173, 195, 0.25);
+}
+
+
+/* ===== Messages Page ===== */
+
+.messages-container h3.h1 {
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    background: linear-gradient(45deg, #c084fc, #e879a0, #fb7185);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.messages-container h5 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+    border-bottom: 1px solid #e8ddd0;
+    padding-bottom: 6px;
+    display: inline-block;
+
+    background: linear-gradient(45deg, #c084fc, #e879a0, #fb7185);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+/* テーブル全体 */
+.messages-container table {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    margin-bottom: 1rem;
+    background-color: var(--sidebar) !important;
+}
+
+.messages-container table tbody tr {
+    transition: background-color 0.15s ease;
+    border-bottom: 1px solid #eee;
+}
+
+.messages-container table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.messages-container table tbody tr:hover {
+    background-color: #f0f4ff !important;
+}
+
+.messages-container table td {
+    padding: 12px 14px;
+    vertical-align: middle;
+    background-color: var(--sidebar) !important;
+}
+
+.table-fixed-layout {
+    table-layout: fixed;
+}
+
+.messages-container table {
+    border-bottom: none;
+}
+
+.messages-container table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* 相手の名前 */
+.messages-container table td:nth-child(2) {
+    font-weight: 600;
+    color: #212529;
+    white-space: nowrap;
+}
+
+/* メッセージ本文(1行で省略) */
+.messages-container table td:nth-child(3) {
+    color: #6c757d;
+    max-width: 0; /* table-layout: fixed と併用すると省略が効きやすい */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* 時刻 */
+.messages-container table td:last-child {
+    color: #adb5bd;
+    font-size: 0.8rem;
+    text-align: right;
+    white-space: nowrap;
+}
+
+/* セクション見出し(Start new chat) */
+.messages-container h5.text-secondary {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 6px;
+}
+
+/* 会話なし表示 */
+.messages-container h3.h2.text-secondary {
+    padding: 3rem 0;
+    opacity: 0.6;
+}
+
+/* アバターリンクのフォーカス時の見た目調整(アクセシビリティ用) */
+.messages-container td a:focus-visible img,
+.messages-container td a:focus-visible i {
+    outline: 2px solid #0d6efd;
+    outline-offset: 2px;
+    border-radius: 50%;
+}
+
