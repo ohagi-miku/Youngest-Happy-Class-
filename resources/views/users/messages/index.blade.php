@@ -18,9 +18,9 @@
                         <tr onclick="window.location='{{ route('message.show', $partner->id) }}'" style="cursor: pointer;">
                             <td class="col-2">
                                 @if ($partner->avatar)
-                                    <a href="{{ route('profile.show', $partner->id) }}" onclick="event.stopPropagation()"><img src="{{ $partner->avatar }}" alt="{{ $partner->name }}" class="rounded-circle avatar-md"></a>
+                                    <a href="{{ route('profile.show', $partner->id) }}" onclick="event.stopPropagation()" class="text-decoration-none"><img src="{{ $partner->avatar }}" alt="{{ $partner->name }}" class="rounded-circle avatar-md"></a>
                                 @else
-                                    <a href="{{ route('profile.show', $partner->id) }}" onclick="event.stopPropagation()"><i class="fa-solid fa-circle-user text-secondary icon-md"></i></a>
+                                    <a href="{{ route('profile.show', $partner->id) }}" onclick="event.stopPropagation()" class="text-decoration-none"><i class="fa-solid fa-circle-user text-secondary icon-md"></i></a>
                                 @endif
                             </td>
                             <td class="col-2">{{ $isReceiver ? $partner->name : 'You' }} :</td>
@@ -43,9 +43,9 @@
                         <tr onclick="window.location='{{ route('message.show', $user->id) }}'" style="cursor: pointer;">
                             <td class="col-2">
                                 @if ($user->avatar)
-                                    <a href="{{ route('profile.show', $user->id) }}" onclick="event.stopPropagation()"><img src="{{ $user->avatar }}" alt="{{ $user->name }}" class="rounded-circle avatar-md"></a>
+                                    <a href="{{ route('profile.show', $user->id) }}" onclick="event.stopPropagation()" class="text-decoration-none"><img src="{{ $user->avatar }}" alt="{{ $user->name }}" class="rounded-circle avatar-md"></a>
                                 @else
-                                    <a href="{{ route('profile.show', $user->id) }}" onclick="event.stopPropagation()"></a><i class="fa-solid fa-circle-user text-secondary icon-md"></i>
+                                    <a href="{{ route('profile.show', $user->id) }}" onclick="event.stopPropagation()" class="text-decoration-none"><i class="fa-solid fa-circle-user text-secondary icon-md"></i></a>
                                 @endif
                             </td>
                             <td class="col-2">{{ $user->name }}</td>

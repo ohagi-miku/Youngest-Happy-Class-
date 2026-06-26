@@ -195,6 +195,7 @@ body {
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
+
 /* テーブル全体 */
 .messages-container table {
     border-radius: 12px;
@@ -202,6 +203,7 @@ body {
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
     margin-bottom: 1rem;
     background-color: var(--sidebar) !important;
+    border-bottom: none;
 }
 
 .messages-container table tbody tr {
@@ -209,12 +211,13 @@ body {
     border-bottom: 1px solid #eee;
 }
 
-.messages-container table tbody tr:last-child {
+.messages-container table tbody tr:last-child,
+.messages-container table tbody tr:last-child td {
     border-bottom: none;
 }
 
 .messages-container table tbody tr:hover {
-    background-color: #f0f4ff !important;
+    background-color: rgba(247, 173, 195, 0.12) !important; /* --red を薄く */
 }
 
 .messages-container table td {
@@ -227,12 +230,29 @@ body {
     table-layout: fixed;
 }
 
-.messages-container table {
-    border-bottom: none;
+/* アバター列を縦中央揃え(画像とアイコンの位置ズレ対策) */
+.messages-container table td.col-2:first-child {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 
-.messages-container table tbody tr:last-child td {
-    border-bottom: none;
+.avatar-md,
+.icon-md {
+    width: 3.5rem;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar-md {
+    object-fit: cover;
+}
+
+.icon-md {
+    font-size: 3.5rem;
+    line-height: 1;
 }
 
 /* 相手の名前 */
@@ -244,8 +264,8 @@ body {
 
 /* メッセージ本文(1行で省略) */
 .messages-container table td:nth-child(3) {
-    color: #6c757d;
-    max-width: 0; /* table-layout: fixed と併用すると省略が効きやすい */
+    color: #9a8f80;
+    max-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -253,20 +273,10 @@ body {
 
 /* 時刻 */
 .messages-container table td:last-child {
-    color: #adb5bd;
+    color: #c9bba8;
     font-size: 0.8rem;
     text-align: right;
     white-space: nowrap;
-}
-
-/* セクション見出し(Start new chat) */
-.messages-container h5.text-secondary {
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-weight: 700;
-    border-bottom: 1px solid #e9ecef;
-    padding-bottom: 6px;
 }
 
 /* 会話なし表示 */
@@ -275,10 +285,10 @@ body {
     opacity: 0.6;
 }
 
-/* アバターリンクのフォーカス時の見た目調整(アクセシビリティ用) */
+/* アバターリンクのフォーカス時(テーマカラーに統一) */
 .messages-container td a:focus-visible img,
 .messages-container td a:focus-visible i {
-    outline: 2px solid #0d6efd;
+    outline: 2px solid var(--red);
     outline-offset: 2px;
     border-radius: 50%;
 }
